@@ -85,10 +85,11 @@ void Viewer::Print() const {
     cout << "Viewer Age: " << age << endl;
     cout << "Preferred Genres: ";
     for (const string& genre : preferredGenres) {
-        cout << genre << " ";
+        cout << genre << ", ";
     }
+    cout << "Favorite Directors: ";
     for (const string& director : favoriteDirectors) {
-        cout << director << " ";
+        cout << director << ", ";
     }
     cout << endl;
 }
