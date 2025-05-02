@@ -1,3 +1,8 @@
+/**
+ * Viewer.h
+ * The Viever class defines ...
+ **/
+
 #ifndef VIEWER_H
 #define VIEWER_H
 
@@ -8,25 +13,25 @@
 using namespace std;
 
 class Viewer {
-private:
-    string name;
-    int age;
-    vector<string> preferredGenres;
+    private:
+        string name;
+        int age;
+        vector<string> preferredGenres;
 
-public:
-    // Constructors
-    Viewer(string viewerName);
-    Viewer(string viewerName, int viewerAge);
+    public:
+        // Constructors
+        Viewer(string viewerName);
+        Viewer(string viewerName, int viewerAge);
 
-    //Getters
-    string GetViewerName() const;
-    int GetViewerAge() const;
+        //Getters
+        string GetViewerName() const;
+        int GetViewerAge() const;
 
-    void AddPreferredGenre(const string& genre);
+        void AddPreferredGenre(const string& genre);
 
-    //Overload operators and output
-    bool operator==(const Viewer& rhs) const;
-    void Print() const;
+        //Overload operators and output
+        bool operator==(const Viewer& rhs) const;
+        void Print() const;
 };
 
 Viewer::Viewer(string viewerName) {
