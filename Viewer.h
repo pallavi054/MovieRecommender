@@ -19,6 +19,7 @@ class Viewer {
         string name;
         int age;
         vector<string> preferredGenres;
+        vector<string> favoriteDirectors;
 
     public:
         // Constructors
@@ -31,6 +32,9 @@ class Viewer {
 
         void AddPreferredGenre(const string& genre);
         vector<string> GetPreferredGenres() const;
+
+        void AddFavoriteDirector(const string& director);
+        vector<string> GetFavoriteDirectors() const;
 
         //Overload operators and output
         bool operator==(const Viewer& rhs) const;
@@ -63,6 +67,14 @@ vector<string> Viewer::GetPreferredGenres() const {
     return preferredGenres;
 }
 
+void Viewer::AddFavoriteDirector(const string& director) {
+    favoriteDirectors.push_back(director);
+}
+
+vector<string> Viewer::GetPreferredGenres() const {
+    return favoriteDirectors;
+}
+
 bool Viewer::operator==(const Viewer& rhs) const{
     return name == rhs.name && age == rhs.age;
 }
@@ -73,6 +85,9 @@ void Viewer::Print() const {
     cout << "Preferred Genres: ";
     for (const string& genre : preferredGenres) {
         cout << genre << " ";
+    }
+    for (const string& director : favoriteDirectors) {
+        cout << director << " ";
     }
     cout << endl;
 }
