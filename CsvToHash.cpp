@@ -44,7 +44,7 @@ unordered_map<string, Movie> readCSVToHashTable(const string& filename) {
             movieTable[title] = movie;
         } catch (const exception&) {
             cerr << "Error parsing line: " << line << endl;
-            return {};
+            continue;
         }
         movieTable[title] = movie;
       }
