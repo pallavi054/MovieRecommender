@@ -18,8 +18,13 @@ struct Movie {
 unordered_map<string, Movie> readCSVToHashTable(const string& filename) {
     unordered_map<string, Movie> movieTable;
     ifstream file(filename);
-    string line;
 
+    if (!file.is_open()) {
+        cerr << "Error - unable to open the file!" << endl;
+        return {};
+    }
+
+    string line;
     getline(file, line);
 
     while (getline(file, line)) {
@@ -27,16 +32,22 @@ unordered_map<string, Movie> readCSVToHashTable(const string& filename) {
         string title, temp;
         Movie movie;
 
-        getline(ss, title, ',');
-        getline(ss, temp, ','); movie.year = stoi(temp);
-        getline(ss, movie.genre, ',');
-        getline(ss, movie.director, ',');
-        getline(ss, movie.cast, ',');
-        getline(ss, temp, ','); movie.runtime = stoi(temp);
-        getline(ss, temp, ','); movie.rating = stod(temp);
+        try {
+            getline(ss, title, ',');
+            getline(ss, temp, ','); movie.year = stoi(temp);
+            getline(ss, movie.genre, ',');
+            getline(ss, movie.director, ',');
+            getline(ss, movie.cast, ',');
+            getline(ss, temp, ','); movie.runtime = stoi(temp);
+            getline(ss, temp, ','); movie.rating = stod(temp);
 
-      movieTable[title] = movie;
-  }
+            movieTable[title] = movie;
+        } catch (const exception&) {
+            cerr << "Error parsing line: " << line << endl;
+            return {};
+        }
+        movieTable[title] = movie;
+      }
 
   return movieTable;
 }
@@ -63,4 +74,3 @@ int main() {
 
     return 0;
 }
-
