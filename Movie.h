@@ -12,14 +12,14 @@
 using namespace std;
 
 class Movie {
-	public:
+    public:
 		// Functions go here..
 
 		// Default class constructor
 
 		// Parametrized class constructor
 
-	private:
+    private:
 		string title;     // Name of the movie
 		int year;	      // Release year
 		string genre;     // Movie category (Action, Comedy, Drama, etc.)
