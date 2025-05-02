@@ -22,8 +22,8 @@ unordered_map<string, Movie> readCSVToHashTable(const string& filename) {
 
     getline(file, line);
 
-    while (getline(file, line)); {
-        stringsteam ss(line);
+    while (getline(file, line)) {
+        stringstream ss(line);
         string title, temp;
         Movie movie;
 
@@ -43,8 +43,8 @@ unordered_map<string, Movie> readCSVToHashTable(const string& filename) {
 
 void printHashTable(const unordered_map<string, Movie>& table) {
     for (const auto& pair : table) {
-        cout << "Title; " << pair.first << endl;
-        cout << "Year: " << pair.second.year << end;
+        cout << "Title: " << pair.first << endl;
+        cout << "Year: " << pair.second.year << endl;
         cout << "Genre: " << pair.second.genre << endl;
         cout << "Director: " << pair.second.director << endl;
         cout << "Cast: " << pair.second.cast << endl;
@@ -57,7 +57,7 @@ void printHashTable(const unordered_map<string, Movie>& table) {
 int main() {
     string filename = "movieData.csv";
 
-    unordered_map<string, Movie> movieTable = readCSVToHashtable)(filename);
+    unordered_map<string, Movie> movieTable = readCSVToHashTable(filename);
 
     printHashTable(movieTable);
 
