@@ -1,6 +1,8 @@
 /**
  * Viewer.h
- * The Viever class defines ...
+ * The Viever class represents a person who watches content (e.g., movies, TV shows)
+ * and has preferences for genres. This class provides functionality to manage the viewer's name,
+ * age, and list of preferred genres.
  **/
 
 #ifndef VIEWER_H
@@ -28,6 +30,7 @@ class Viewer {
         int GetViewerAge() const;
 
         void AddPreferredGenre(const string& genre);
+        vector<string> GetPreferredGenres() const;
 
         //Overload operators and output
         bool operator==(const Viewer& rhs) const;
@@ -54,6 +57,24 @@ int Viewer::GetViewerAge() const {
 
 void Viewer::AddPreferredGenre(const string& genre) {
     preferredGenres.push_back(genre);
+}
+
+vector<string> Viewer::GetPreferredGenres() const {
+    return preferredGenres;
+}
+
+bool Viewer::operator==(const Viewer& rhs) const{
+    return name == rhs.name && age == rhs.age;
+}
+
+void Viewer::Print() const {
+    cout << "Viewer Name: " << name << endl;
+    cout << "Viewer Age: " << age << endl;
+    cout << "Preferred Genres: ";
+    for (const string& genre : preferredGenres) {
+        cout << genre << " ";
+    }
+    cout << endl;
 }
 
 #endif
