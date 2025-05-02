@@ -6,16 +6,21 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
 class Movie {
 	public:
-	    // Functions go here..
+		// Functions go here..
 
 		// Default class constructor
 
 		// Parametrized class constructor
-	
+
 	private:
-	    string title;     // Name of the movie
+		string title;     // Name of the movie
 		int year;	      // Release year
 		string genre;     // Movie category (Action, Comedy, Drama, etc.)
 		string director;  // Name of movie’s director
