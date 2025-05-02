@@ -15,12 +15,6 @@
 using namespace std;
 
 class Viewer {
-    private:
-        string name;
-        int age;
-        vector<string> preferredGenres;
-        vector<string> favoriteDirectors;
-
     public:
         // Constructors
         Viewer(string viewerName);
@@ -29,16 +23,23 @@ class Viewer {
         //Getters
         string GetViewerName() const;
         int GetViewerAge() const;
-
-        void AddPreferredGenre(const string& genre);
         vector<string> GetPreferredGenres() const;
-
-        void AddFavoriteDirector(const string& director);
         vector<string> GetFavoriteDirectors() const;
+
+        //Setters
+        void AddPreferredGenre(const string& genre);
+        void AddFavoriteDirector(const string& director);
 
         //Overload operators and output
         bool operator==(const Viewer& rhs) const;
         void Print() const;
+
+    private:
+        string name;    // Name of the viewer
+        int age;    // Age of the viewer
+        vector<string> preferredGenres;    // A list of genres the viewer prefers to watch
+        vector<string> favoriteDirectors;   // A list of the viewers favorite directors
+
 };
 
 Viewer::Viewer(string viewerName) {
