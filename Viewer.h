@@ -25,10 +25,12 @@ class Viewer {
         int GetViewerAge() const;
         vector<string> GetPreferredGenres() const;
         vector<string> GetFavoriteDirectors() const;
+	vector<string> GetWatchlist() const;
 
         //Setters
         void AddPreferredGenre(const string& genre);
         void AddFavoriteDirector(const string& director);
+        void AddToWatchlist(const string& title);
 
         //Overload operators and output
         bool operator==(const Viewer& rhs) const;
@@ -39,7 +41,7 @@ class Viewer {
         int age;    // Age of the viewer
         vector<string> preferredGenres;    // A list of genres the viewer prefers to watch
         vector<string> favoriteDirectors;   // A list of the viewers favorite directors
-
+        vector<string> watchlist;           // A list of movies the viewer has seen
 };
 
 Viewer::Viewer(string viewerName) {
@@ -72,8 +74,16 @@ void Viewer::AddFavoriteDirector(const string& director) {
     favoriteDirectors.push_back(director);
 }
 
-vector<string> Viewer::GetPreferredGenres() const {
+void Viewer::AddToWatchlist(const string& title) {
+    watchlist.push_back(title);
+}
+
+vector<string> Viewer::GetFavoriteDirectors() const {
     return favoriteDirectors;
+}
+
+vector<string> Viewer::GetWatchlist() const {
+    return watchlist;
 }
 
 bool Viewer::operator==(const Viewer& rhs) const{
@@ -87,9 +97,13 @@ void Viewer::Print() const {
     for (const string& genre : preferredGenres) {
         cout << genre << ", ";
     }
-    cout << "Favorite Directors: ";
+    cout << "\nFavorite Directors: ";
     for (const string& director : favoriteDirectors) {
         cout << director << ", ";
+    }
+    cout << "\nViewer's Watchlist: ";
+    for (const auto& title : watchlist) {
+        cout << title << ", ";
     }
     cout << endl;
 }
