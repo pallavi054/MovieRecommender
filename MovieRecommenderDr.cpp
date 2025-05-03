@@ -28,41 +28,54 @@ void readCSVToHashTable(HashType& movieTable, const string& filename);
 void printHashTable(const HashType& movieTable);
 
 int main() {
+    // File containing movie data
     string filename = "movieData.csv";
+
+    // Create a hash table to store movies
     HashType movieTable;
 
+    // Load movie data from the CSV file into the hash table
     readCSVToHashTable(movieTable, filename);
 
+    // Display all movies in the hash table
     printHashTable(movieTable);
 
-    // Create a viewer with preferences
-	Viewer viewer("Jane Doe", 25);
-	viewer.AddPreferredGenre("Adventure");
-	viewer.AddPreferredGenre("Sci-Fi");
-	viewer.AddFavoriteDirector("Steven Spielberg");
-	viewer.AddToWatchlist("Jurassic Park");
-	viewer.AddToWatchlist("Inception");
-	viewer.AddToWatchlist("E.T. The Extra-Terrestrial");
-	// Print the viewer's details
-	viewer.Print();
+    // Set up a viewer with preferences and watchlist
+    Viewer viewer("Jane Doe", 25);
+    viewer.AddPreferredGenre("Adventure");
+    viewer.AddPreferredGenre("Sci-Fi");
+    viewer.AddFavoriteDirector("Steven Spielberg");
+    viewer.AddToWatchlist("Jurassic Park");
+    viewer.AddToWatchlist("Inception");
+    viewer.AddToWatchlist("E.T. The Extra-Terrestrial");
 
-    // Complete this...
-    
+    // Show the viewer's details
+    viewer.Print();
+
+    // This is where additional tests or features can be added
+
     return 0;
-};
+}
 
+/**
+ * Reads movie data from a CSV file and inserts it into the hash table.
+ * 
+ * @param movieTable The hash table where movies will be stored.
+ * @param filename The name of the CSV file containing the movie data.
+ */
 void readCSVToHashTable(HashType& movieTable, const string& filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
-        cerr << "Error - unable to open the file!" << endl;
+        cerr << "Error: Could not open the file!" << endl;
         return;
     }
 
     string line;
-    getline(file, line);
-    
-    cout << "Beginning hash table initialization from CSV..." << endl;
+    getline(file, line);  // Skip the header line
+
+    cout << "Loading movies from the CSV file into the hash table..." << endl;
+
     while (getline(file, line)) {
         stringstream ss(line);
         string title, temp, genre, director, cast;
@@ -70,6 +83,7 @@ void readCSVToHashTable(HashType& movieTable, const string& filename) {
         double rating;
 
         try {
+            // Parse the CSV data
             getline(ss, title, ',');
             getline(ss, temp, ','); year = stoi(temp);
             getline(ss, genre, ',');
@@ -78,22 +92,29 @@ void readCSVToHashTable(HashType& movieTable, const string& filename) {
             getline(ss, temp, ','); runtime = stoi(temp);
             getline(ss, temp, ','); rating = stod(temp);
 
+            // Create a Movie object and add it to the hash table
             Movie movie(title, year, genre, director, cast, runtime, rating);
             movieTable.InsertMovie(movie);
-            cout << "Inserted movie " << movie.GetTitle() << endl;
+            cout << "Added movie: " << movie.GetTitle() << endl;
         }
         catch (const exception&) {
-            cerr << "Error parsing line: " << line << endl;
+            cerr << "Error: Could not parse the line - " << line << endl;
             continue;
         }
     }
-    cout << "Hash table initialization from CSV complete!" << endl;
+
+    cout << "All movies have been successfully loaded into the hash table!" << endl;
 }
 
+/**
+ * Prints all the movies currently stored in the hash table.
+ * 
+ * @param movieTable The hash table containing movies to be printed.
+ */
 void printHashTable(const HashType& movieTable) {
     vector<Movie> movieList = movieTable.GetMovies();
 
-    for (const Movie& movie: movieList) {
+    for (const Movie& movie : movieList) {
         cout << "Title: " << movie.GetTitle() << endl;
         cout << "Year: " << movie.GetYear() << endl;
         cout << "Genre: " << movie.GetGenre() << endl;
