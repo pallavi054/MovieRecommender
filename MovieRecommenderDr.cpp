@@ -1,7 +1,7 @@
 /*****************************************************************************************
  * Name:        MovieRecommenderDr.cpp
  * Author:      1) FILL IN
- *              2) FILL IN
+ *              2) Jessica Alba
  *              3) Pallavi Aggarwal
  * Date:        5/3/2025
  * Description: (CHANGE) This driver tests the function allPairsShortestPaths which takes a graph
@@ -36,6 +36,16 @@ int main() {
     printHashTable(movieTable);
 
     // Create a viewer with preferences
+	Viewer viewer("Jane Doe", 25);
+	viewer.AddPreferredGenre("Adventure");
+	viewer.AddPreferredGenre("Sci-Fi");
+	viewer.AddFavoriteDirector("Steven Spielberg");
+	viewer.AddToWatchlist("Jurassic Park");
+	viewer.AddToWatchlist("Inception");
+	viewer.AddToWatchlist("E.T. The Extra-Terrestrial");
+	// Print the viewer's details
+	viewer.Print();
+
     // Complete this...
     
     return 0;
