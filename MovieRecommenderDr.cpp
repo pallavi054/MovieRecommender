@@ -1,20 +1,15 @@
-/*****************************************************************************************
+/***********************************************************************************************
  * Name:        MovieRecommenderDr.cpp
- * Author:      1) FILL IN
+ * Author:      1) Mohammed Al frijie
  *              2) Jessica Alba
  *              3) Pallavi Aggarwal
- *              4) Mohammed Al frijie  
- * Date:        5/3/2025
- * Description: (CHANGE) This driver tests the function allPairsShortestPaths which takes a graph
- *              as an argument. The function uses Floyd’s algorithm to modify the graph
- *              so that it contains the shortest paths between any vertices that are
- *              connected by paths.
- * 
- *              Floyd’s algorithm solves the all-pairs shortest-path problem. That is,
- *              for each vertex v in a graph, the algorithm finds the shortest path from
- *              vertex v to any other vertex w that is reachable from v.
-*****************************************************************************************/
-
+ * Date:        5/4/2025
+ * Description: This driver tests the movie recommender program. It first reads a CSV file
+ *              of base Rotten Tomatoes data for movies, including their ratings. Then 
+ *              it inserts these entries into a hash table. The drivers shows how different
+ *              viewers can be instantiated in the program with their favorite directors and/or
+ *              preferred genres and be recommended movies not already in their watchlists.
+***********************************************************************************************/
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -39,21 +34,53 @@ int main() {
     readCSVToHashTable(movieTable, filename);
 
     // Display all movies in the hash table
-    printHashTable(movieTable);
+    //printHashTable(movieTable);
+    
+    // Set up a Mom profile with her preferences and watchlist
+    Viewer mom("Mom", 38);
+    mom.AddPreferredGenre("Romance");
+    mom.AddPreferredGenre("Drama");
+    mom.AddToWatchlist("The Notebook");
+    mom.AddToWatchlist("27 Dresses");
 
-    // Set up a viewer with preferences and watchlist
-    Viewer viewer("Jane Doe", 25);
-    viewer.AddPreferredGenre("Adventure");
-    viewer.AddPreferredGenre("Sci-Fi");
-    viewer.AddFavoriteDirector("Steven Spielberg");
-    viewer.AddToWatchlist("Jurassic Park");
-    viewer.AddToWatchlist("Inception");
-    viewer.AddToWatchlist("E.T. The Extra-Terrestrial");
+    // Show Mom's details and recommendations
+    mom.Print();
+    movieTable.RecommendMovies(mom);
 
-    // Show the viewer's details
-    viewer.Print();
+    // Set up a Dad profile with his preferences and watchlist
+    Viewer dad("Dad", 40);
+    dad.AddPreferredGenre("SciFi");
+    dad.AddFavoriteDirector("Steven Spielberg");
+    dad.AddToWatchlist("Jurassic Park");
+    dad.AddToWatchlist("Inception");
+    dad.AddToWatchlist("E.T. The Extra-Terrestrial");
+    
+    // Show Dad's details and recommendations
+    dad.Print();
+    movieTable.RecommendMovies(dad);
 
-    // This is where additional tests or features can be added
+    // Set up a child's profile with preferences and watchlist
+    Viewer daughter("Cindy", 8);
+    daughter.AddPreferredGenre("Kids&Family");
+    daughter.AddToWatchlist("Finding Nemo");
+    daughter.AddToWatchlist("Toy Story 3");
+    daughter.AddToWatchlist("Frozen");
+    
+    // Show Cindy's details and recommendations
+    daughter.Print();
+    movieTable.RecommendMovies(daughter);
+    
+    // Set up a teenage son's viewer with preferences and watchlist
+    Viewer teenageSon("Dan", 15);
+    teenageSon.AddPreferredGenre("Action");
+    teenageSon.AddPreferredGenre("Comedy");
+    teenageSon.AddFavoriteDirector("Joss Whedon");
+    teenageSon.AddToWatchlist("Avengers: Infinity War");
+    teenageSon.AddToWatchlist("The Hunger Games: Catching Fire");
+    
+    // Show Dan's details and recommendations
+    teenageSon.Print();
+    movieTable.RecommendMovies(teenageSon);
 
     return 0;
 }
@@ -96,7 +123,7 @@ void readCSVToHashTable(HashType& movieTable, const string& filename) {
             // Create a Movie object and add it to the hash table
             Movie movie(title, year, genre, director, cast, runtime, rating);
             movieTable.InsertMovie(movie);
-            cout << "Added movie: " << movie.GetTitle() << endl;
+            cout << "Inserted movie: " << movie.GetTitle() << endl;
         }
         catch (const exception&) {
             cerr << "Error: Could not parse the line - " << line << endl;
@@ -105,6 +132,8 @@ void readCSVToHashTable(HashType& movieTable, const string& filename) {
     }
 
     cout << "All movies have been successfully loaded into the hash table!" << endl;
+    cout << "The movie hash table has " << movieTable.GetNumItems() << " items stored." << endl;
+    cout << "*******************************************************" << endl;
 }
 
 /**
